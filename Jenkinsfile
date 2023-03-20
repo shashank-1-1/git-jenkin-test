@@ -1,22 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('Pull Files') {
             steps {
-                git branch: 'main', url: 'https://github.com/example/repo.git'
-            }
-        }
-        stage('Copy Files') {
-            steps {
-                sh 'scp -r path/to/files user@remote:/path/to/destination'
+                sh 'ssh ubuntu@13.232.66.159 "git clone https://github.com/shashank-1-1/git-jenkin-test.git /home/ubuntu"'
             }
         }
     }
     post {
         success {
-            emailext body: 'Your Jenkins job has completed successfully',
+            emailext body: 'Jenkins job has completed successfully',
                      subject: 'Jenkins Job Successful',
-                     to: 'your-email@example.com'
+                     to: 'shashank.shekhar.jg@hitachi-systems.com'
         }
     }
 }
